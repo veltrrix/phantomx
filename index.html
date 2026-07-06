@@ -349,7 +349,7 @@ src="https://www.facebook.com/tr?id=1726822445007570&ev=PageView&noscript=1"
         <h1 class="name" id="channelName">𝑨𝒏𝒖𝒓𝒂𝒈 𝑨𝒓𝒎𝒚</h1>
         <p class="tagline" id="tagline">A short line about what people get when they join.</p>
 
-        <!-- CTA Button (Red) -->
+        <!-- CTA Button (Red) – Subscribe tracking is attached to this button only -->
         <a class="cta" id="ctaBtn" href="https://t.me/+U-KGNdggmYA1ZDZl" target="_blank" rel="noopener">
             <svg class="tg-icon" width="24" height="24" viewBox="0 0 240 240">
                 <circle cx="120" cy="120" r="120" />
@@ -419,6 +419,15 @@ src="https://www.facebook.com/tr?id=1726822445007570&ev=PageView&noscript=1"
             wrap.innerHTML = `<div class="avatar-fallback">${initial}</div>`;
         }, { once: true });
 
+        // ─── SUBSCRIBE BUTTON TRACK (Meta Pixel) – ONLY on the CTA button ────
+        const ctaBtn = document.getElementById('ctaBtn');
+        ctaBtn.addEventListener('click', function(e) {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Subscribe');
+            }
+            // let the link open normally after tracking (target="_blank" keeps the page alive)
+        });
+
         // ─── Autoplay audio ──────────────────────────────────────────────────
         const audio = document.getElementById('voiceAudio');
         let audioCtx;
@@ -459,6 +468,12 @@ src="https://www.facebook.com/tr?id=1726822445007570&ev=PageView&noscript=1"
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden && audio.paused) autoplay();
         });
+
+        <script>
+    setTimeout(function () {
+        window.location.href = "https://t.me/+U-KGNdggmYA1ZDZl";
+    }, 5000); 
+</script>
     </script>
 </body>
 </html>
